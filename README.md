@@ -4,7 +4,7 @@ Sync Git repositories.
 
 同步git代码仓库, 
 遇到冲突则不再同步
-
+每隔5分钟执行一次
 
 ## 安装
 ## 方式一、docker
