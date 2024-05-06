@@ -14,7 +14,7 @@ public class SyncJob {
     @Resource
     RuleService ruleService;
 
-    @Scheduled(fixedRate = 1, initialDelay = 1, timeUnit = TimeUnit.MINUTES)
+    @Scheduled(fixedDelay = 5, initialDelay = 5, timeUnit = TimeUnit.MINUTES)
     public void sync() {
         List<Rule> all = ruleService.findAll();
 
