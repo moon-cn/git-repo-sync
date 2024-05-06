@@ -29,7 +29,7 @@ FROM openjdk:8-alpine
 # 打包生成的文件放到 /home下
 COPY --from=JAVA /home/app.jar /home/app.jar
 
-EXPOSE 7001
+EXPOSE 8080
 
 # 启动命令
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Duser.timezone=Asia/Shanghai","-jar","/home/app.jar"]
