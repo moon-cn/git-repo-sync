@@ -1,6 +1,3 @@
-LABEL maintainer="https://github.com/moon-cn/git-repo-sync"
-
-
 # 步骤1 前端打包
 FROM node:14-alpine as WEB
 WORKDIR /tmp/build
