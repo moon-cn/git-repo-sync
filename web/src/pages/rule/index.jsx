@@ -1,8 +1,7 @@
-import {Button, message, Modal, Popconfirm, Result, Skeleton} from 'antd';
+import {Button, Col, Form, Input, message, Modal, Popconfirm, Result, Row, Select, Skeleton, Tag} from 'antd';
 import React from 'react';
 
 import {ProTable} from "@ant-design/pro-components";
-import {history} from "umi";
 import hutool from "@moon-cn/hutool";
 
 let api = '/api/rule/';
@@ -16,42 +15,36 @@ export default class extends React.Component {
     showEditForm: false,
     formValues: {},
 
+
+    credentialOption: [],
+
   }
   actionRef = React.createRef();
   columns = [
     {
       title: '仓库1',
       dataIndex: ['repo1', 'url'],
-      formItemProps: {
-        rules: [{required: true}],
+      render(_, r) {
+        return <>{r.repo1.url} &nbsp;
+          <Tag>{r.repo1.branch}</Tag>
+        </>
       }
-    },
-    {
-      title: '分支',
-      dataIndex: ['repo1', 'branch'],
-    },
-    {
-      title: '凭证',
-      dataIndex: ['repo1', 'branch'],
-    },
-    {
-      title: '仓库2',
-      dataIndex: ['repo2', 'url'],
-      formItemProps: {
-        rules: [{required: true}],
-      }
-    },
-    {
-      title: '分支',
-      dataIndex: ['repo2', 'branch'],
     },
 
     {
-      title: '最近更新',
-      dataIndex: 'modifyTime',
-      sorter: true,
-      hideInSearch: true,
-      hideInForm: true,
+      title: '仓库2',
+      dataIndex: ['repo2', 'url'],
+      render(_, r) {
+        return <>{r.repo1.url} &nbsp;
+          <Tag>{r.repo1.branch}</Tag>
+        </>
+      }
+    },
+
+
+    {
+      title: '上次同步',
+      dataIndex: 'lastTime',
     },
     {
       title: '操作',
@@ -60,8 +53,14 @@ export default class extends React.Component {
       render: (_, row) => {
         return <>
           <Button
-            type='link'
+            size='small'
             onClick={() => {
+              this.sync(row.id)
+            }}>立即同步</Button>
+          &nbsp;
+          <Button             size='small'
+
+                              onClick={() => {
               this.setState({
                 formOpen: true,
                 formValues: row
@@ -70,7 +69,7 @@ export default class extends React.Component {
           &nbsp;
           <Popconfirm title="确定删除，删除后将不可恢复"
                       onConfirm={() => this.handleDelete(row)}>
-            <a>删除</a>
+            <Button size='small'>删除</Button>
           </Popconfirm>
 
         </>
@@ -79,6 +78,11 @@ export default class extends React.Component {
   ];
 
 
+  componentDidMount() {
+    hutool.http.get("/api/credential/options").then(rs => {
+      this.setState({credentialOption: rs.data})
+    })
+  }
 
   handleSave = value => {
     value.id = this.state.formValues.id
@@ -100,6 +104,8 @@ export default class extends React.Component {
   }
 
 
+  formRef = React.createRef()
+
   render() {
     let {formOpen} = this.state
 
@@ -112,8 +118,8 @@ export default class extends React.Component {
             this.setState({
               formOpen: true,
               formValues: {
-                repo1: { branch: 'master'},
-                repo2: { branch: 'master'},
+                repo1: {branch: 'master'},
+                repo2: {branch: 'master'},
               }
             })
           }}>
@@ -126,35 +132,64 @@ export default class extends React.Component {
         rowKey="id"
         bordered={true}
         options={{search: true}}
-
       />
 
 
       <Modal
         maskClosable={false}
         destroyOnClose
+        width={800}
         title='规则信息'
         open={formOpen}
         onCancel={() => {
           this.setState({formOpen: false})
         }}
-        footer={null}
+        onOk={() => this.formRef.current.submit()}
       >
-        <ProTable
-          type='form'
-          form={{
-            initialValues: this.state.formValues,
-            layout: 'horizontal',
-            labelCol: {flex: '100px'},
-          }}
-          onSubmit={this.handleSave}
-          columns={this.columns}
-        />
+
+        <Form ref={this.formRef} layout='vertical' onFinish={this.handleSave} initialValues={this.state.formValues}>
+          <Row gutter={4}>
+            <Col span={16}>
+              <Form.Item label='仓库地址' name={['repo1', 'url']} rules={[{required: true}]}>
+                <Input/>
+              </Form.Item>
+            </Col>
+            <Col span={4}>
+              <Form.Item label='分支' name={['repo1', 'branch']} rules={[{required: true}]} >
+                <Input/>
+              </Form.Item>
+            </Col>
+
+          </Row>
+
+          <Row gutter={4}>
+            <Col span={16}>
+              <Form.Item label='仓库地址' name={['repo2', 'url']} rules={[{required: true}]}>
+                <Input/>
+              </Form.Item>
+            </Col>
+            <Col span={4}>
+              <Form.Item label='分支' name={['repo2', 'branch']} rules={[{required: true}]} >
+                <Input/>
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form>
+
+
       </Modal>
     </>)
   }
 
 
+  sync = id => {
+    let hide = message.loading('同步中....', 0);
+    hutool.http.post('api/rule/sync', {id}).then(rs => {
+      message.success(rs.message)
+      this.reload()
+    }).finally(hide)
+
+  };
 }
 
 

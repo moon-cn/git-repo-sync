@@ -21,4 +21,8 @@ public class Credential extends BaseEntity {
     String password;
 
 
+    @NotNull
+    String url;
+
+
 }

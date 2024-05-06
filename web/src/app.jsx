@@ -5,7 +5,7 @@ import {history} from 'umi';
 import {message, Modal} from "antd";
 import hutool from "@moon-cn/hutool";
 
-
+import './global.css'
 
 hutool.http.setGlobalErrorMessageHandler(msg=>{
   message.error(msg)

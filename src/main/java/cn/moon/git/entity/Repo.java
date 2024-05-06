@@ -1,5 +1,7 @@
 package cn.moon.git.entity;
 
+import cn.moon.git.service.CredentialService;
+import cn.moon.lang.web.SpringTool;
 import cn.moon.lang.web.persistence.BaseEntity;
 import cn.moon.validation.StartWithLetter;
 import lombok.Getter;
@@ -25,26 +27,17 @@ public class Repo extends BaseEntity {
     String branch;
 
 
-    @ManyToOne
-    Credential credential;
-
     @Transient
-    public UsernamePasswordCredentialsProvider getCredentialsProvider(){
-        if (credential != null) {
-            UsernamePasswordCredentialsProvider provider = new UsernamePasswordCredentialsProvider(credential.getUsername(), credential.getPassword());
-
-            return provider;
-        }
-        return null;
+    public UsernamePasswordCredentialsProvider getCredentialsProvider() {
+        return SpringTool.getBean(CredentialService.class).getProvider(url);
     }
 
 
     public Repo() {
     }
 
-    public Repo(String url, String branch, Credential credential) {
+    public Repo(String url, String branch) {
         this.url = url;
         this.branch = branch;
-        this.credential = credential;
     }
 }

@@ -14,8 +14,8 @@ public class Test {
         credential.setPassword(System.getenv("GITEE_PASSWORD")); // gitee 的密码，放环境变量
 
         Rule rule = new Rule();
-        rule.setRepo1(new Repo("https://gitee.com/moon_cn/test1.git", "master", credential));
-        rule.setRepo2(new Repo("https://gitee.com/moon_cn/test2.git", "master", credential));
+        rule.setRepo1(new Repo("https://gitee.com/moon_cn/test1.git", "master"));
+        rule.setRepo2(new Repo("https://gitee.com/moon_cn/test2.git", "master"));
 
 
         RuleService ruleService = new RuleService();

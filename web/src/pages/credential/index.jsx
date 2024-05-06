@@ -19,6 +19,11 @@ export default class extends React.Component {
   actionRef = React.createRef();
   columns = [
     {
+      title: 'url',
+      dataIndex: 'url',
+    },
+
+    {
       title: '账号',
       dataIndex: 'username',
     },
@@ -26,6 +31,7 @@ export default class extends React.Component {
     {
       title: '密码',
       dataIndex: 'password',
+      valueType: 'password'
     },
 
     {
@@ -124,7 +130,7 @@ export default class extends React.Component {
       <Modal
         maskClosable={false}
         destroyOnClose
-        title='规则信息'
+        title='凭证信息'
         open={formOpen}
         onCancel={() => {
           this.setState({formOpen: false})

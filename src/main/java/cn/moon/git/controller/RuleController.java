@@ -39,14 +39,21 @@ public class RuleController {
         return rs;
     }
 
+    @RequestMapping("sync")
+    public Result sync(@RequestBody Rule rule) {
+        Rule db = service.findOne(rule.getId());
+        service.sync(db);
+
+        Result rs = Result.ok().msg("同步成功");
+        return rs;
+    }
 
 
     @RequestMapping("delete")
-    public Result delete( String id)  {
+    public Result delete(String id) {
         service.deleteById(id);
         return Result.ok().msg("删除成功");
     }
-
 
 
 }

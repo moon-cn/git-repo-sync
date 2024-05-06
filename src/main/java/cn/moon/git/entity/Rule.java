@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -21,5 +22,7 @@ public class Rule extends BaseEntity {
     @NotNull
     @ManyToOne(cascade = CascadeType.ALL)
     Repo repo2;
+
+    Date lastTime;
 
 }

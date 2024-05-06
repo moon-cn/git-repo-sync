@@ -2,7 +2,6 @@ import React from 'react';
 import {Layout, Menu, message} from 'antd';
 import {history} from 'umi';
 import {
-  AppstoreOutlined,
   ClusterOutlined, GithubOutlined,
   LogoutOutlined, OrderedListOutlined,
   ProjectOutlined,
@@ -40,19 +39,20 @@ export default class extends React.Component {
   render() {
     // 权限过滤
     let items = [
-      {
-        key: 'credential',
-        label: '凭据',
-        icon: <GithubOutlined style={{color: 'green'}}/>
-      },
+
       {
         key: 'rule',
         label: '规则',
         icon: <OrderedListOutlined style={{color: 'gold'}}/>,
       },
       {
+        key: 'credential',
+        label: '凭据',
+        icon: <GithubOutlined style={{color: 'green'}}/>
+      },
+      {
         key: 'user',
-        label: '修改密码',
+        label: '用户设置',
         icon: <UserSwitchOutlined style={{color: 'darkmagenta'}}/>,
       },
       {

@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.util.Date;
 import java.util.Map;
 
 @Service
@@ -33,7 +34,6 @@ public class RuleService extends BaseService<Rule> {
 
 
 
-    @Async
     public void sync(Rule rule) {
         Repo repo1 = rule.getRepo1();
         Repo repo2 = rule.getRepo2();
@@ -92,6 +92,8 @@ public class RuleService extends BaseService<Rule> {
 
             git.close();
             workDir.delete();
+
+            rule.setLastTime(new Date());
         } catch (Exception e) {
             e.printStackTrace();
         }
