@@ -12,10 +12,15 @@ Sync Git repositories.
 docker run -p:8080:8080 -v /derby-data:/derby-data --name git-repo-sync -d mooncn/git-repo-sync:latest  
 ```
 http://127.0.0.1:8080
+
 默认账号：admin,密码：123456
 
+# 方式二、 java
+略
+
 # 使用方式
-- 创建仓库的凭据，目前只支持账号密码方式。
+- 创建凭据
+目前只支持账号密码方式。
 其中url用来匹配git仓库，可以简单填写域名如https://gitee.com
 
 - 定义规则
