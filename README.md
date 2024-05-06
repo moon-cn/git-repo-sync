@@ -9,7 +9,7 @@ Sync Git repositories.
 ## 安装
 ## 方式一、docker
 ```
-docker run -p:8080:8080 -v /data:/home/data --name git-repo-sync -d mooncn/git-repo-sync:latest  
+docker run -p:8080:8080 -v /derby-data:/derby-data --name git-repo-sync -d mooncn/git-repo-sync:latest  
 ```
 http://127.0.0.1:8080
 默认账号：admin,密码：123456
