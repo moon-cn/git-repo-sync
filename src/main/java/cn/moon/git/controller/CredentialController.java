@@ -2,6 +2,7 @@ package cn.moon.git.controller;
 
 import cn.moon.git.entity.Credential;
 import cn.moon.git.service.CredentialService;
+import cn.moon.lang.web.Option;
 import cn.moon.lang.web.Result;
 import cn.moon.lang.web.persistence.BaseEntity;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -50,6 +52,13 @@ public class CredentialController {
 
 
 
+    @RequestMapping("options")
+    public Result options()  {
+        List<Credential> list = service.findAll();
+        List<Option> options = Option.convertList(list, BaseEntity::getId, Credential::getUsername);
+
+        return Result.ok().data(options);
+    }
 
 
 

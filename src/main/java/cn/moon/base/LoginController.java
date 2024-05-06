@@ -35,6 +35,9 @@ public class LoginController {
     public Result checkLogin() {
         boolean isLogin = SecurityUtils.getSubject().isAuthenticated();
 
+        if(isLogin){
+            return Result.ok();
+        }
         return Result.err().msg("检查登录结果：未登录");
     }
 

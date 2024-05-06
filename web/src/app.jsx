@@ -11,7 +11,7 @@ hutool.http.setGlobalErrorMessageHandler(msg=>{
   message.error(msg)
 })
 hutool.http.axiosInstance.interceptors.response.use(rs=>{
-  if(!rs.success){
+  if(rs.success === false){
     message.error(rs.message)
     return Promise.reject(rs.message)
   }

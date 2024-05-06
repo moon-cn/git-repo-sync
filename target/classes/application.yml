@@ -1,0 +1,19 @@
+spring:
+  jackson:
+    serialization:
+      fail_on_empty_beans: false
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: derby
+    show-sql: false
+
+
+  datasource:
+    driver-class-name: org.apache.derby.jdbc.EmbeddedDriver
+    url: jdbc:derby:data;create=true
+    username: root
+    password: root

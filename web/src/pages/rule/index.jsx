@@ -30,7 +30,10 @@ export default class extends React.Component {
       title: '分支',
       dataIndex: ['repo1', 'branch'],
     },
-
+    {
+      title: '凭证',
+      dataIndex: ['repo1', 'branch'],
+    },
     {
       title: '仓库2',
       dataIndex: ['repo2', 'url'],

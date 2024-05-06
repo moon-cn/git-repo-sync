@@ -12,6 +12,7 @@ import org.eclipse.jgit.merge.MergeStrategy;
 import org.eclipse.jgit.transport.URIish;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.io.File;
@@ -97,7 +98,13 @@ public class RuleService extends BaseService<Rule> {
     }
 
 
+    @Transactional
     public Rule saveRule(Rule rule) {
-        return null;
+        if(!rule.isNew()){
+            Rule db = dao.findById(rule.getId()).orElse(null);
+            db.setRepo1(null);
+            db.setRepo2(null);
+        }
+        return dao.save(rule);
     }
 }

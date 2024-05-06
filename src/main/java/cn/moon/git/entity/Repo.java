@@ -25,7 +25,6 @@ public class Repo extends BaseEntity {
     String branch;
 
 
-
     @ManyToOne
     Credential credential;
 
