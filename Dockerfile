@@ -27,6 +27,7 @@ FROM openjdk:8-alpine
 COPY --from=JAVA /home/app.jar /home/app.jar
 
 EXPOSE 8080
+VOLUME /db
 
 
 # 启动命令
