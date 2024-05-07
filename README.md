@@ -1,6 +1,6 @@
 # git-repo-sync
+多GIT仓库互相同步
 
-Sync Git repositories.
 
 同步git代码仓库, 
 遇到冲突则不再同步
