@@ -27,7 +27,7 @@ FROM openjdk:8-alpine
 COPY --from=JAVA /home/app.jar /home/app.jar
 
 EXPOSE 8080
-VOLUME /derby-data
+
 
 # 启动命令
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Duser.timezone=Asia/Shanghai","-jar","/home/app.jar"]
