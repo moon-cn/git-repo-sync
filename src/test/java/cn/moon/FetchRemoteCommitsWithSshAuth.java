@@ -1,8 +1,6 @@
 package cn.moon;
 
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.Session;
+import com.jcraft.jsch.*;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LsRemoteCommand;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -27,13 +25,14 @@ import java.util.Map;
  */
 public class FetchRemoteCommitsWithSshAuth {
     private static final String REMOTE_URL = "git@github.com:moon-cn/git-repo-sync.git";
-    private static final String PRIVATE_KEY = "C:\\Users\\moon\\.ssh\\id_rsa";
+    private static final String PRIVATE_KEY = "C:\\Users\\moon\\.ssh\\id_ed25519";
 
     public static void main(String[] args) throws GitAPIException {
 
         final SshSessionFactory sshSessionFactory = new JschConfigSessionFactory() {
             @Override
             protected void configure(OpenSshConfig.Host host, Session session) {
+                session.setConfig("StrictHostKeyChecking", "no");
             }
 
             @Override

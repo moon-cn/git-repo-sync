@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start": "umi dev",
+    "start": "SET NODE_OPTIONS=--openssl-legacy-provider && umi dev",
     "build": "umi build",
     "tailwindcss": "npx tailwindcss -i ./src/input.css -o ./src/tailwind-dist.css --watch"
   },

@@ -35,6 +35,9 @@ public class CredentialController {
 
     @RequestMapping("save")
     public Result save(@RequestBody Credential gitCredential) {
+        if(gitCredential.getSshKey() != null){
+            gitCredential.setSshKey(gitCredential.getSshKey().trim());
+        }
         Credential db = service.save(gitCredential);
 
         Result rs = Result.ok().msg("保存成功");

@@ -42,12 +42,12 @@ export default class extends React.Component {
 
       {
         key: 'rule',
-        label: '规则',
+        label: '同步规则',
         icon: <OrderedListOutlined style={{color: 'gold'}}/>,
       },
       {
         key: 'credential',
-        label: '凭据',
+        label: '仓库凭据',
         icon: <GithubOutlined style={{color: 'green'}}/>
       },
       {

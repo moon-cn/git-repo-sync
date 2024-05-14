@@ -40,11 +40,11 @@ public class RuleController {
     }
 
     @RequestMapping("sync")
-    public Result sync(@RequestBody Rule rule) {
+    public Result sync(@RequestBody Rule rule) throws Exception {
         Rule db = service.findOne(rule.getId());
         service.sync(db);
 
-        Result rs = Result.ok().msg("同步成功");
+        Result rs = Result.ok().msg("同步命令执行完成");
         return rs;
     }
 

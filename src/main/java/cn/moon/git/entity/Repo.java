@@ -9,7 +9,6 @@ import lombok.Setter;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
@@ -18,7 +17,6 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class Repo extends BaseEntity {
 
-    @StartWithLetter
     @NotNull
     String url;
 
@@ -27,10 +25,7 @@ public class Repo extends BaseEntity {
     String branch;
 
 
-    @Transient
-    public UsernamePasswordCredentialsProvider getCredentialsProvider() {
-        return SpringTool.getBean(CredentialService.class).getProvider(url);
-    }
+
 
 
     public Repo() {

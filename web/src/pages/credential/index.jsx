@@ -19,8 +19,9 @@ export default class extends React.Component {
   actionRef = React.createRef();
   columns = [
     {
-      title: '地址',
-      dataIndex: 'url',
+      title: '域名或IP',
+      dataIndex: 'hostname',
+
     },
 
     {
@@ -35,9 +36,14 @@ export default class extends React.Component {
     },
 
     {
-      title: 'ssh',
-      dataIndex: 'ssh',
-      valueType: 'text'
+      title: 'ssh私钥',
+      dataIndex: 'sshKey',
+      valueType: 'textarea',
+      render(v){
+        if(v){
+          return hutool.str.ellipsis(v,30)
+        }
+      }
     },
 
 
