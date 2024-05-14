@@ -21,7 +21,7 @@ COPY --from=WEB /tmp/build/dist/ src/main/resources/static/
 RUN mvn -DskipTests=true -q package && mv target/*.jar /home/app.jar
 
 # 步骤3 使用干净的java环境作为镜像
-FROM openjdk:8-alpine
+FROM openjdk:22-alpine
 
 # 打包生成的文件放到 /home下
 COPY --from=JAVA /home/app.jar /home/app.jar

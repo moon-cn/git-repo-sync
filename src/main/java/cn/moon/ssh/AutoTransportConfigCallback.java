@@ -1,12 +1,13 @@
 package cn.moon.ssh;
 
-import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.TransportConfigCallback;
-import org.eclipse.jgit.errors.TransportException;
-import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.transport.*;
-import org.eclipse.jgit.util.FS;
+import org.eclipse.jgit.transport.SshTransport;
+import org.eclipse.jgit.transport.Transport;
+import org.eclipse.jgit.transport.TransportHttp;
+import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AutoTransportConfigCallback implements TransportConfigCallback {
     @Override
     public void configure(Transport transport) {
