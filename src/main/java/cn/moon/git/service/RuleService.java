@@ -55,14 +55,18 @@ public class RuleService extends BaseService<Rule> {
                     .setBranch(branch)
                     .setCredentialsProvider(repo1.getCredentialsProvider())
                     .call();
+            log.info("仓库1代码克隆完成");
 
             boolean repo1Empty = git.fetch().setCredentialsProvider(repo1.getCredentialsProvider()).call().getAdvertisedRefs().isEmpty();
             if (repo1Empty) {
                 log.info("仓库1为新仓库");
             }
 
+            log.info("切换为仓库2 {}", repo2.getUrl());
             git.remoteSetUrl().setRemoteUri(new URIish(repo2.getUrl())).setRemoteName("origin").call();
+            log.info("获取仓库2信息");
             boolean repo2Empty = git.fetch().setCredentialsProvider(repo2.getCredentialsProvider()).call().getAdvertisedRefs().isEmpty();
+            log.info("仓库2是否为空：{}", repo2Empty);
 
             if (repo1Empty && repo2Empty) {
                 log.info("仓库1、2都为新仓库，退出");

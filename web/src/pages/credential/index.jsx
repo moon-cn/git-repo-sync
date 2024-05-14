@@ -19,7 +19,7 @@ export default class extends React.Component {
   actionRef = React.createRef();
   columns = [
     {
-      title: 'url',
+      title: '地址',
       dataIndex: 'url',
     },
 

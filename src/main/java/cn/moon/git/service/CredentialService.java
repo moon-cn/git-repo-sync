@@ -30,13 +30,15 @@ public class CredentialService extends BaseService<Credential> {
         // 倒叙，先匹配长的，后匹配短的
         Collections.reverse(list);
         for (Credential credential : list) {
-            if (url.startsWith(credential.getUrl())) {
+            if (url.contains(credential.getUrl())) {
                 return new UsernamePasswordCredentialsProvider(credential.getUsername(), credential.getPassword());
             }
         }
 
         return null;
     }
+
+
 
 
 }
