@@ -7,7 +7,7 @@ import cn.moon.git.service.RuleService;
 
 public class Test {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         Credential credential = new Credential();
         credential.setUsername("moon_cn");
